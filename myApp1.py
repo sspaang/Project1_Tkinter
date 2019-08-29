@@ -130,7 +130,6 @@ btn2.place(x=320,y=380)
 entry_field1 = Entry(bd=4)
 entry_field1.place(x=400, y=72)
 
-
 # --------- Text field ---------
 text_field = Text(master=window, height=10, width=60)
 text_field.place(x=100,y=200)
