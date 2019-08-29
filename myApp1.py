@@ -83,9 +83,6 @@ def phase_display():
 
     entry_field1.delete(0, 'end')       # clear entry field after button pressed
 
-def Enter_key(event):
-    phase_display()
-
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
         for f in funcs:
@@ -124,8 +121,8 @@ label1.place(x=598, y=165)
 # --------- BUTTON ---------
 btn1 = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(phase_display, retrieve_input))
 btn1.place(x=435,y=120)
-# can press Enter key instead of clicking on btn1
-btn1.invoke()
+
+btn1.invoke()       # can press Enter key instead of clicking on btn1
 window.bind('<Return>', lambda event=None: btn1.invoke())
 
 btn2 = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
