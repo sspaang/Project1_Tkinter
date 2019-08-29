@@ -83,6 +83,8 @@ def phase_display():
 
     entry_field1.delete(0, 'end')       # clear entry field after button pressed
 
+def Enter_key(event):
+    phase_display()
 
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
@@ -110,7 +112,7 @@ bg_image_label = Label(window, image=bg_image)
 bg_image_label.place(relwidth=1, relheight=1)
 
 # --------- LABEL ---------
-title = Label(text="ลงทะเบียนประชุม", font=40, fg="#0D1526", bg="#FFC1B2")
+title = Label(text="Meeting Sign-In", font='times 20', fg="#0D1526", bg="#FFC1B2")
 title.place(x=330,y=10)
 
 stdcodelabel = Label(text='รหัสนิสิต',font=18)
@@ -122,6 +124,9 @@ label1.place(x=598, y=165)
 # --------- BUTTON ---------
 btn1 = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(phase_display, retrieve_input))
 btn1.place(x=435,y=120)
+# can press Enter key instead of clicking on btn1
+btn1.invoke()
+window.bind('<Return>', lambda event=None: btn1.invoke())
 
 btn2 = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
 btn2.place(x=320,y=380)
