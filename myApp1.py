@@ -30,7 +30,11 @@ def export_btn():
     this_time = datetime.datetime.now()
     this_timestr = this_time.strftime('%B %d, %Y')
 
-    fw = open(result_txt,"w")
+    #   create export txt file
+    this_timestr_2 = this_time.strftime('%d_%m_%Y')
+    this_timestr_2_txt = os.path.join(THIS_FOLDER, f'{this_timestr_2}.txt')
+
+    fw = open(this_timestr_2_txt,"w")       # create the new txt file
     for item in stdList:
         fw.write(f'{this_timestr}\n{item}')
     fw.close()
@@ -67,10 +71,12 @@ def phase_display():
     this_time = datetime.datetime.now()
     this_timestr = this_time.strftime('%B %d, %Y %H:%M:%S')
 
+    text_field.configure(state='normal')
     text_field.insert('1.0', f'({this_timestr}): {std_name}\n')
     text_field.place()
     text_field.configure(state='disable')   # disable to type anything into text box
 
+    collecct_stdcode_field.configure(state='normal')
     collecct_stdcode_field.insert('1.0', f'{student_code}\n')
     collecct_stdcode_field.place()
     collecct_stdcode_field.configure(state='disable')
@@ -131,7 +137,6 @@ text_field.place(x=100,y=200)
 
 collecct_stdcode_field = Text(master=window, height=10, width=8)
 collecct_stdcode_field.place(x=600,y=200)
-
 
 # makes the frame appear on the screen
 window.mainloop()
