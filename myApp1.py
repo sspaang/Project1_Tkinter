@@ -6,7 +6,6 @@ import datetime
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 my_file = os.path.join(THIS_FOLDER, 'information.txt')
-result_txt = os.path.join(THIS_FOLDER, 'result.txt')
 bgimage_png = os.path.join(THIS_FOLDER, 'Material.png')
 
 file = open(my_file,"r")
@@ -82,6 +81,7 @@ def phase_display():
     collecct_stdcode_field.configure(state='disable')
 
     entry_field1.delete(0, 'end')       # clear entry field after button pressed
+
 
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
