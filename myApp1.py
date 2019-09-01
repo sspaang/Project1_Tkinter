@@ -11,6 +11,7 @@ bgimage_png = os.path.join(THIS_FOLDER, 'Material.png')
 file = open(my_file,"r")
 student_map = {}
 std_list = []
+counter = 0
 
 for line in file:
     column = line.split(',')   
@@ -19,6 +20,12 @@ for line in file:
     student_map.update({student_id:student_name})
 
 def put_to_list():
+    # นับจำนวนคนที่มา
+    global counter
+    counter += 1
+    count_label.config(text=counter)    #อัพเดท count_label
+
+    # เก็บรหัสนิสิตใส่ list
     std_id = entry_field1.get()
     std_list.append(int(std_id))
 
@@ -122,6 +129,12 @@ stdcodelabel.place(x=300, y=70)
 
 label1 = Label(text='รหัสนิสิต', font=18)
 label1.place(x=598, y=165)
+
+label2 = Label(text='จำนวนคนที่มา:', font=18)
+label2.place(x=100, y=165)
+
+count_label = Label(window, text="0", font=18)
+count_label.place(x=210,y=165)
 
 # --------- BUTTON ---------
 btn1 = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(put_to_list,phase_display))
