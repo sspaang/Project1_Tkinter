@@ -84,10 +84,10 @@ def phase_display():
     this_time = datetime.datetime.now()
     this_timestr = this_time.strftime('%B %d, %Y %H:%M:%S')
 
-    text_field.configure(state='normal')
-    text_field.insert('1.0', f'({this_timestr}): {std_name}\n')
-    text_field.place()
-    text_field.configure(state='disable')   # disable to type anything into text box
+    collect_field.configure(state='normal')
+    collect_field.insert('1.0', f'({this_timestr}): {std_name}\n')
+    collect_field.place()
+    collect_field.configure(state='disable')   # disable to type anything into text box
 
     collect_stdcode_field.configure(state='normal')
     collect_stdcode_field.insert('1.0', f'{student_code}\n')
@@ -160,11 +160,11 @@ count_label = Label(window, text="0", font=18)
 count_label.place(x=210,y=165)
 
 # --------- BUTTON ---------
-btn1 = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(put_to_list,phase_display))
-btn1.place(x=435,y=120)
+SignIn_Btn = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(put_to_list,phase_display))
+SignIn_Btn.place(x=435,y=120)
 
-btn2 = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
-btn2.place(x=320,y=380)
+export_Btn = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
+export_Btn.place(x=320,y=380)
 
 # --------- Entry field ---------
 entry_field1 = Entry(bd=4)
@@ -174,9 +174,9 @@ entry_field1.bind("<Return>", onReturn)        # can press Enter key instead of 
 entry_field1.place(x=400, y=72)
 
 # --------- Text field ---------
-text_field = Text(master=window, height=10, width=60)
-text_field.place(x=100,y=200)
-text_field.configure(state='disable')
+collect_field = Text(master=window, height=10, width=60)
+collect_field.place(x=100,y=200)
+collect_field.configure(state='disable')
 
 collect_stdcode_field = Text(master=window, height=10, width=8)
 collect_stdcode_field.place(x=600,y=200)
