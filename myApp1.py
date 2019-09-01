@@ -102,6 +102,11 @@ def combine_funcs(*funcs):
 def onReturn(*args):
     return combine_funcs(phase_display(), put_to_list())
 
+""" ---------------------------------------------------------------------------------------------------------"""
+
+this_time = datetime.datetime.now()
+this_timestr = this_time.strftime('%B %d, %Y')
+
 HEIGHT = 450
 WIDTH = 800
 
@@ -111,26 +116,30 @@ window.title("Meeting")     # set the title
 
 canvas = Canvas(window, height=HEIGHT, width=WIDTH)      # set the window size
 canvas.pack()
+
 window.resizable(width=False, height=False)     # fixed size window
 
-frame = Frame(window, bg='blue')
+frame = Frame(window, bg='#B2D7F2')
 frame.place(relwidth=1, relheight=1)
-
+'''
 bg_image = PhotoImage(file=bgimage_png)
 bg_image_label = Label(window, image=bg_image)
 bg_image_label.place(relwidth=1, relheight=1)
-
+'''
 # --------- LABEL ---------
-title = Label(text="Meeting Sign-In", font='Courier 20 bold', fg="#0D1526", bg="#FFC1B2")
+title = Label(window, text="Meeting Sign-In", font='Courier 20 bold', fg="#0D1526", bg="#FFC1B2")
 title.place(x=300,y=10)
 
-stdcodelabel = Label(text='รหัสนิสิต',font=18)
-stdcodelabel.place(x=300, y=70)
+time_label = Label(window, text=this_timestr, font=18)
+time_label.place(x=50, y=20)
 
-label1 = Label(text='รหัสนิสิต', font=18)
+stdcodelabel = Label(window, text='รหัสนิสิต',font=18)
+stdcodelabel.place(x=320, y=72)
+
+label1 = Label(window, text='รหัสนิสิต', font=18)
 label1.place(x=598, y=165)
 
-label2 = Label(text='จำนวนคนที่มา:', font=18)
+label2 = Label(window,text='จำนวนคนที่มา:', font=18)
 label2.place(x=100, y=165)
 
 count_label = Label(window, text="0", font=18)
@@ -153,9 +162,11 @@ entry_field1.place(x=400, y=72)
 # --------- Text field ---------
 text_field = Text(master=window, height=10, width=60)
 text_field.place(x=100,y=200)
+text_field.configure(state='disable')
 
 collect_stdcode_field = Text(master=window, height=10, width=8)
 collect_stdcode_field.place(x=600,y=200)
+collect_stdcode_field.configure(state='disable')
 
 # makes the frame appear on the screen
 window.mainloop()
