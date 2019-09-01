@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 import os
 import datetime
+import time
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 my_file = os.path.join(THIS_FOLDER, 'information.txt')
@@ -102,6 +103,11 @@ def combine_funcs(*funcs):
 def onReturn(*args):
     return combine_funcs(phase_display(), put_to_list())
 
+def update_clock():
+    time_str = time.strftime('%H:%M:%S')
+    time_label.configure(text=time_str)
+    window.after(1000, update_clock)    # refresh
+
 """ ---------------------------------------------------------------------------------------------------------"""
 
 this_time = datetime.datetime.now()
@@ -130,8 +136,12 @@ bg_image_label.place(relwidth=1, relheight=1)
 title = Label(window, text="Meeting Sign-In", font='Courier 20 bold', fg="#0D1526", bg="#FFC1B2")
 title.place(x=300,y=10)
 
-time_label = Label(window, text=this_timestr, font=18)
-time_label.place(x=50, y=20)
+date_label = Label(window, text=this_timestr, font=18)
+date_label.place(x=50, y=20)
+
+time_label = Label(window, text="", font=18)
+time_label.place(x=50, y=50)
+update_clock()
 
 stdcodelabel = Label(window, text='รหัสนิสิต',font=18)
 stdcodelabel.place(x=320, y=72)
