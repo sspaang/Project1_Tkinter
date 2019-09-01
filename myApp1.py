@@ -22,20 +22,29 @@ def retrieve_input():
     inputValue = collecct_stdcode_field.get("1.0","end-1c")
     return inputValue
 
+def put_to_list():
+    std_id = entry_field1.get()
+    std_list.append(int(std_id))
+
+    entry_field1.delete(0, 'end')       # clear entry field after button pressed
+
+    return std_list
+
+def sorted_list():
+    return sorted(std_list)
+
 def export_btn():
-    stdList = []
-    stdList.append(retrieve_input())
 
     this_time = datetime.datetime.now()
-    this_timestr = this_time.strftime('%B %d, %Y')
+    #this_timestr = this_time.strftime('%B %d, %Y')
 
     #   create export txt file
     this_timestr_2 = this_time.strftime('%d_%m_%Y')
     this_timestr_2_txt = os.path.join(THIS_FOLDER, f'{this_timestr_2}.txt')
 
     fw = open(this_timestr_2_txt,"w")       # create the new txt file
-    for item in stdList:
-        fw.write(f'{this_timestr}\n{item}')
+    for item in sorted_list():
+        fw.write(f'{item}\n')
     fw.close()
 
     export_btn_display()
@@ -80,9 +89,6 @@ def phase_display():
     collecct_stdcode_field.place()
     collecct_stdcode_field.configure(state='disable')
 
-    entry_field1.delete(0, 'end')       # clear entry field after button pressed
-
-
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
         for f in funcs:
@@ -119,12 +125,12 @@ label1 = Label(text='รหัสนิสิต', font=18)
 label1.place(x=598, y=165)
 
 # --------- BUTTON ---------
-btn1 = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(phase_display, retrieve_input))
+btn1 = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(phase_display, put_to_list))
 btn1.place(x=435,y=120)
-
+'''
 btn1.invoke()       # can press Enter key instead of clicking on btn1
 window.bind('<Return>', lambda event=None: btn1.invoke())
-
+'''
 btn2 = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
 btn2.place(x=320,y=380)
 
