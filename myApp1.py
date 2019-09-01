@@ -136,7 +136,7 @@ btn2.place(x=320,y=380)
 # --------- Entry field ---------
 entry_field1 = Entry(bd=4)
 
-entry_field1.bind("<Return>", onReturn)        # can press Enter key instead of clicking on btn1
+entry_field1.bind("<Return>", onReturn)        # can press Enter key instead of clicking on btn1 -- Return means Enter key --
 
 entry_field1.place(x=400, y=72)
 
