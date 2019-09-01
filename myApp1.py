@@ -141,7 +141,7 @@ time_label.place(x=50, y=50)
 update_clock()
 
 stdcode_entry_label = Label(window, text='รหัสนิสิต',font='THSarabunPSK 12', bg='#B2D7F2')
-stdcode_entry_label.place(x=320, y=72)
+stdcode_entry_label.place(x=290, y=72)
 
 count_ppl_label = Label(window,text='จำนวนคนที่มา', font='THSarabunPSK 12', bg='#B2D7F2')
 count_ppl_label.place(x=185, y=165)
@@ -151,7 +151,7 @@ count_label.place(x=185+100,y=165)
 
 # --------- BUTTON ---------
 SignIn_Btn = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(put_to_list,phase_display))
-SignIn_Btn.place(x=435,y=110)
+SignIn_Btn.place(x=405,y=110)
 
 export_Btn = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
 export_Btn.place(x=320,y=400)
@@ -161,7 +161,7 @@ entry_field1 = Entry(bd=4)
 
 entry_field1.bind("<Return>", onReturn)        # can press Enter key instead of clicking on btn1 -- Return means Enter key --
 
-entry_field1.place(x=400, y=72)
+entry_field1.place(x=370, y=72)
 
 # ---------- List Box & Scroll bar ---------
 collect_field_listbox = Listbox(window, height=10, width=50, font='THSarabunPSK 12')
