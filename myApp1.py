@@ -108,17 +108,20 @@ def update_clock():
     time_label.configure(text=time_str)
     window.after(1000, update_clock)    # refresh
 
-""" ---------------------------------------------------------------------------------------------------------"""
+def update_date():
+    this_time = datetime.datetime.now()
+    this_timestr = this_time.strftime('%d %B %Y')
+    date_label.configure(text=this_timestr)
+    window.after(1000, update_date)
 
-this_time = datetime.datetime.now()
-this_timestr = this_time.strftime('%B %d, %Y')
+""" ---------------------------------------------------------------------------------------------------------"""
 
 HEIGHT = 450
 WIDTH = 800
 
 window = Tk()   # initiate gui
 
-window.title("Meeting")     # set the title
+window.title("CPE Meeting")     # set the title
 
 canvas = Canvas(window, height=HEIGHT, width=WIDTH)      # set the window size
 canvas.pack()
@@ -136,21 +139,22 @@ bg_image_label.place(relwidth=1, relheight=1)
 title = Label(window, text="Meeting Sign-In", font='Courier 20 bold', fg="#0D1526", bg="#FFC1B2")
 title.place(x=300,y=10)
 
-date_label = Label(window, text=this_timestr, font=18)
+date_label = Label(window, text="", font=18)
 date_label.place(x=50, y=20)
+update_date()
 
 time_label = Label(window, text="", font=18)
 time_label.place(x=50, y=50)
 update_clock()
 
-stdcodelabel = Label(window, text='รหัสนิสิต',font=18)
-stdcodelabel.place(x=320, y=72)
+stdcode_entry_label = Label(window, text='รหัสนิสิต',font=18)
+stdcode_entry_label.place(x=320, y=72)
 
-label1 = Label(window, text='รหัสนิสิต', font=18)
-label1.place(x=598, y=165)
+student_code_label = Label(window, text='รหัสนิสิต', font=18)
+student_code_label.place(x=605, y=165)
 
-label2 = Label(window,text='จำนวนคนที่มา:', font=18)
-label2.place(x=100, y=165)
+count_ppl_label = Label(window,text='จำนวนคนที่มา:', font=18)
+count_ppl_label.place(x=100, y=165)
 
 count_label = Label(window, text="0", font=18)
 count_label.place(x=210,y=165)
