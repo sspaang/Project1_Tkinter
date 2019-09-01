@@ -166,6 +166,7 @@ entry_field1.place(x=400, y=72)
 # ---------- List Box & Scroll bar ---------
 collect_field_listbox = Listbox(window, height=10, width=50, font='THSarabunPSK 12')
 yscroll = Scrollbar(window, orient=VERTICAL, command=collect_field_listbox.yview)
+
 collect_field_listbox.configure(yscrollcommand = yscroll.set)
 
 collect_field_listbox.place(x=185, y=200)
