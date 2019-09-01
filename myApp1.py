@@ -80,10 +80,10 @@ def phase_display():
     text_field.place()
     text_field.configure(state='disable')   # disable to type anything into text box
 
-    collecct_stdcode_field.configure(state='normal')
-    collecct_stdcode_field.insert('1.0', f'{student_code}\n')
-    collecct_stdcode_field.place()
-    collecct_stdcode_field.configure(state='disable')
+    collect_stdcode_field.configure(state='normal')
+    collect_stdcode_field.insert('1.0', f'{student_code}\n')
+    collect_stdcode_field.place()
+    collect_stdcode_field.configure(state='disable')
 
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
@@ -140,8 +140,8 @@ entry_field1.place(x=400, y=72)
 text_field = Text(master=window, height=10, width=60)
 text_field.place(x=100,y=200)
 
-collecct_stdcode_field = Text(master=window, height=10, width=8)
-collecct_stdcode_field.place(x=600,y=200)
+collect_stdcode_field = Text(master=window, height=10, width=8)
+collect_stdcode_field.place(x=600,y=200)
 
 # makes the frame appear on the screen
 window.mainloop()
