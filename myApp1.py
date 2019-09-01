@@ -129,8 +129,8 @@ bg_image_label = Label(window, image=bg_image)
 bg_image_label.place(relwidth=1, relheight=1)
 '''
 # --------- LABEL ---------
-title = Label(window, text="Meeting Sign-In", font='Courier 20 bold', fg="#0D1526", bg="#FFC1B2")
-title.place(x=300,y=10)
+title = Label(window, text="ลงชื่อเข้าประชุม", font='EkkamaiStandard 20', fg="#0D1526", bg="#FFC1B2")
+title.place(x=350,y=10)
 
 date_label = Label(window, text="", font=18)
 date_label.place(x=50, y=20)
