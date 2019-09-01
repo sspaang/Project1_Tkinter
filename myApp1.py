@@ -18,10 +18,6 @@ for line in file:
     student_name = column[1]
     student_map.update({student_id:student_name})
 
-def retrieve_input():
-    inputValue = collecct_stdcode_field.get("1.0","end-1c")
-    return inputValue
-
 def put_to_list():
     std_id = entry_field1.get()
     std_list.append(int(std_id))
