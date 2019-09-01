@@ -82,17 +82,10 @@ def phase_display():
     std_name = studentName()
 
     this_time = datetime.datetime.now()
-    this_timestr = this_time.strftime('%B %d, %Y %H:%M:%S')
-
-    collect_field.configure(state='normal')
-    collect_field.insert('1.0', f'({this_timestr}): {std_name}\n')
-    collect_field.place()
-    collect_field.configure(state='disable')   # disable to type anything into text box
-
-    collect_stdcode_field.configure(state='normal')
-    collect_stdcode_field.insert('1.0', f'{student_code}\n')
-    collect_stdcode_field.place()
-    collect_stdcode_field.configure(state='disable')
+    this_timestr = this_time.strftime('%H:%M:%S')
+   
+    collect_field_listbox.insert(0, f'{this_timestr} : {student_code} {std_name}\n')
+    collect_field_listbox.place()
 
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
@@ -147,24 +140,21 @@ time_label = Label(window, text="", font=18)
 time_label.place(x=50, y=50)
 update_clock()
 
-stdcode_entry_label = Label(window, text='รหัสนิสิต',font=18)
+stdcode_entry_label = Label(window, text='รหัสนิสิต',font='THSarabunPSK 12')
 stdcode_entry_label.place(x=320, y=72)
 
-student_code_label = Label(window, text='รหัสนิสิต', font=18)
-student_code_label.place(x=605, y=165)
-
-count_ppl_label = Label(window,text='จำนวนคนที่มา:', font=18)
-count_ppl_label.place(x=100, y=165)
+count_ppl_label = Label(window,text='จำนวนคนที่มา:', font='THSarabunPSK 12')
+count_ppl_label.place(x=185, y=165)
 
 count_label = Label(window, text="0", font=18)
-count_label.place(x=210,y=165)
+count_label.place(x=185+100,y=165)
 
 # --------- BUTTON ---------
 SignIn_Btn = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(put_to_list,phase_display))
-SignIn_Btn.place(x=435,y=120)
+SignIn_Btn.place(x=435,y=110)
 
 export_Btn = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
-export_Btn.place(x=320,y=380)
+export_Btn.place(x=320,y=400)
 
 # --------- Entry field ---------
 entry_field1 = Entry(bd=4)
@@ -173,14 +163,13 @@ entry_field1.bind("<Return>", onReturn)        # can press Enter key instead of 
 
 entry_field1.place(x=400, y=72)
 
-# --------- Text field ---------
-collect_field = Text(master=window, height=10, width=60)
-collect_field.place(x=100,y=200)
-collect_field.configure(state='disable')
+# ---------- List Box & Scroll bar ---------
+collect_field_listbox = Listbox(window, height=10, width=50, font='THSarabunPSK 12')
+yscroll = Scrollbar(window, orient=VERTICAL, command=collect_field_listbox.yview)
+collect_field_listbox.configure(yscrollcommand = yscroll.set)
 
-collect_stdcode_field = Text(master=window, height=10, width=8)
-collect_stdcode_field.place(x=600,y=200)
-collect_stdcode_field.configure(state='disable')
+collect_field_listbox.place(x=185, y=200)
+yscroll.place(x=645, y=200, relheight=0.425)
 
 # makes the frame appear on the screen
 window.mainloop()
