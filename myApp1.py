@@ -129,24 +129,24 @@ bg_image_label = Label(window, image=bg_image)
 bg_image_label.place(relwidth=1, relheight=1)
 '''
 # --------- LABEL ---------
-title = Label(window, text="ลงชื่อเข้าประชุม", font='EkkamaiStandard 20', fg="#0D1526", bg="#FFC1B2")
-title.place(x=350,y=10)
+title = Label(window, text="Sign-In", font='EkkamaiStandard 20 bold', fg="#0D1526", bg='#B2D7F2')
+title.place(x=350,y=15)
 
-date_label = Label(window, text="", font=18)
+date_label = Label(window, text="", font=18, bg='#B2D7F2')
 date_label.place(x=50, y=20)
 update_date()
 
-time_label = Label(window, text="", font=18)
+time_label = Label(window, text="", font=18, bg='#B2D7F2')
 time_label.place(x=50, y=50)
 update_clock()
 
-stdcode_entry_label = Label(window, text='รหัสนิสิต',font='THSarabunPSK 12')
+stdcode_entry_label = Label(window, text='รหัสนิสิต',font='THSarabunPSK 12', bg='#B2D7F2')
 stdcode_entry_label.place(x=320, y=72)
 
-count_ppl_label = Label(window,text='จำนวนคนที่มา:', font='THSarabunPSK 12')
+count_ppl_label = Label(window,text='จำนวนคนที่มา', font='THSarabunPSK 12', bg='#B2D7F2')
 count_ppl_label.place(x=185, y=165)
 
-count_label = Label(window, text="0", font=18)
+count_label = Label(window, text="0", font=18, bg='#B2D7F2')
 count_label.place(x=185+100,y=165)
 
 # --------- BUTTON ---------
