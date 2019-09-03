@@ -7,11 +7,9 @@ import time
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 my_file = os.path.join(THIS_FOLDER, 'information.txt')
-bgimage_png = os.path.join(THIS_FOLDER, 'Material.png')
 
 file = open(my_file,"r")
 student_map = {}
-std_list = []
 counter = 0
 
 for line in file:
@@ -29,13 +27,15 @@ def put_to_list():
     # เก็บรหัสนิสิตใส่ list
     std_id = entry_field1.get()
     std_list.append(int(std_id))
+    
+    print(std_list)
 
-    entry_field1.delete(0, 'end')       # clear entry field after button pressed
+    entry_field1.delete(0, 'end')
 
     return std_list
 
 def sorted_list():
-    return sorted(std_list)
+    return sorted(list(set(std_list)))
 
 def export_btn():
 
@@ -62,8 +62,12 @@ def phase_generator():
     if len(entry_field1.get()) == 0:
         messagebox.showwarning(title='WARNING', message='กรุณาพิมพ์รหัสนิสิต')
     
-    elif id_found == False:
+    elif id_found is False:
         messagebox.showwarning(title='WARNING', message='ไม่พบรหัสนิสิต กรุณากรอกใหม่อีกครั้ง')
+        entry_field1.delete(0, 'end')
+
+    elif int(entry_field1.get()) in std_list:
+        messagebox.showwarning(title='WARNING', message='รหัสนิสิตนี้ได้ลงทะเบียนแล้ว กรุณากรอกใหม่')
         entry_field1.delete(0, 'end')
 
     else:
@@ -108,6 +112,7 @@ def update_date():
     window.after(1000, update_date)
 
 """ ---------------------------------------------------------------------------------------------------------"""
+std_list = []
 
 HEIGHT = 450
 WIDTH = 800
@@ -123,11 +128,7 @@ window.resizable(width=False, height=False)     # fixed size window
 
 frame = Frame(window, bg='#B2D7F2')
 frame.place(relwidth=1, relheight=1)
-'''
-bg_image = PhotoImage(file=bgimage_png)
-bg_image_label = Label(window, image=bg_image)
-bg_image_label.place(relwidth=1, relheight=1)
-'''
+
 # --------- LABEL ---------
 title = Label(window, text="Sign-In", font='EkkamaiStandard 20 bold', fg="#0D1526", bg='#B2D7F2')
 title.place(x=350,y=15)
