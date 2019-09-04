@@ -10,7 +10,7 @@ my_file = os.path.join(THIS_FOLDER, 'information.txt')
 
 file = open(my_file,"r")
 student_map = {}
-counter = 0
+
 
 for line in file:
     column = line.split(',')   
@@ -18,11 +18,21 @@ for line in file:
     student_name = column[1]
     student_map.update({student_id:student_name})
 
-def put_to_list():
-    # นับจำนวนคนที่มา
+def add_counter():
     global counter
     counter += 1
     count_label.config(text=counter)    #อัพเดท count_label
+    return counter
+
+def decrease_counter():
+    global counter
+    counter -= 1
+    count_label.config(text=counter)
+    return counter
+
+def put_to_list():
+
+    add_counter()
 
     # เก็บรหัสนิสิตใส่ list
     std_id = entry_field1.get()
@@ -88,9 +98,27 @@ def phase_display():
     this_time = datetime.datetime.now()
     this_timestr = this_time.strftime('%H:%M:%S')
    
-    collect_field_listbox.insert(0, f'{this_timestr} : {student_code} {std_name}\n')
+    collect_field_listbox.insert(END, f'{this_timestr} : {student_code} {std_name}')
     collect_field_listbox.place()
 
+def delete_listbox():
+    MsgMox = messagebox.askokcancel(title='!!!', message='คุณต้องการลบชื่อที่เลือกใช่หรือไม่')
+    if MsgMox is True:
+        selected_list = []
+        selected_std = collect_field_listbox.curselection()
+        selected_std = int(selected_std[0])
+        collect_field_listbox.delete(selected_std)
+
+        print(selected_std)
+
+        std_list.pop(selected_std)
+    
+        print(std_list)
+
+        decrease_counter()
+    else:
+        pass
+    
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
         for f in funcs:
@@ -111,8 +139,22 @@ def update_date():
     date_label.configure(text=this_timestr)
     window.after(1000, update_date)
 
+def Result(*args):
+    return search_Button()
+
+def search_Button():
+    entry_get = search_entry.get()
+    if int(entry_get) in std_list:
+        s_result_label.config(text='รหัสนิสิตนี้ได้ลงทะเบียนแล้ว', fg='green')
+        s_entry_label.config(text=entry_get, fg='green')
+    else:
+        s_result_label.config(text='รหัสนิสิตนี้ยังไม่ได้ลงทะเบียน', fg='red')
+        s_entry_label.config(text=entry_get, fg='red')
+    search_entry.delete(0, 'end')
+
 """ ---------------------------------------------------------------------------------------------------------"""
 std_list = []
+counter = 0
 
 HEIGHT = 450
 WIDTH = 800
@@ -150,19 +192,36 @@ count_ppl_label.place(x=185, y=165)
 count_label = Label(window, text="0", font=18, bg='#B2D7F2')
 count_label.place(x=185+100,y=165)
 
+search_label = Label(window, text='ค้นหารหัสนิสิตที่ลงทะเบียนแล้ว', font='THSarabunPSK 12', bg='#B2D7F2')
+search_label.place(x=600,y=10)
+
+s_entry_label = Label(window, text='', font='THSarabunPSK 12', bg='#B2D7F2', fg='red')
+s_entry_label.place(x=655, y=110)
+
+s_result_label = Label(window, text='', font='THSarabunPSK 12', bg='#B2D7F2')
+s_result_label.place(x=615,y=130)
+
 # --------- BUTTON ---------
-SignIn_Btn = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(put_to_list,phase_display))
+SignIn_Btn = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(phase_display,put_to_list))
 SignIn_Btn.place(x=405,y=110)
+
+search_Btn = Button(text='Search', command=search_Button)
+search_Btn.place(x=668, y=75)
+
+delete_Btn = Button(text='Delete', bg='#950028', fg='white', command=delete_listbox)
+delete_Btn.place(x=670, y=200)
 
 export_Btn = Button(text="Export student codes to text file", bg='#7FE5F0', command=export_btn)
 export_Btn.place(x=320,y=400)
 
 # --------- Entry field ---------
 entry_field1 = Entry(bd=4)
-
 entry_field1.bind("<Return>", onReturn)        # can press Enter key instead of clicking on btn1 -- Return means Enter key --
-
 entry_field1.place(x=370, y=72)
+
+search_entry = Entry(bd=4)
+search_entry.bind("<Return>", Result)
+search_entry.place(x=625,y=40)
 
 # ---------- List Box & Scroll bar ---------
 collect_field_listbox = Listbox(window, height=10, width=50, font='THSarabunPSK 12')
