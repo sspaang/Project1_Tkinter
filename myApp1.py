@@ -36,13 +36,14 @@ def put_to_list():
 
     # เก็บรหัสนิสิตใส่ list
     std_id = entry_field1.get()
-    std_list.append(int(std_id))
-    
-    print(std_list)
-
-    entry_field1.delete(0, 'end')
-
-    return std_list
+    try:
+        std_list.append(int(std_id))
+    except Exception as e:
+        print(e)
+    else:
+        print(std_list)
+        entry_field1.delete(0, 'end')
+        return std_list
 
 def sorted_list():
     return sorted(list(set(std_list)))
@@ -84,15 +85,21 @@ def phase_generator():
         stdcode = entry_field1.get()
         name = student_map[stdcode]
         messagebox.showinfo(title='Information', message=f'สวัสดี {name}')
+        phase_display()
+        put_to_list()
         return stdcode
 
 def studentName():
     stdcode = entry_field1.get()
-    name = student_map[stdcode]
-    return name
+    try:
+        name = student_map[stdcode]
+    except Exception as e:
+        print(e)
+    else:
+        return name
 
 def phase_display():
-    student_code = phase_generator()
+    student_code = int(entry_field1.get())
     std_name = studentName()
 
     this_time = datetime.datetime.now()
@@ -109,12 +116,9 @@ def delete_listbox():
         selected_std = int(selected_std[0])
         collect_field_listbox.delete(selected_std)
 
-        print(selected_std)
-
+        print(f"delete at index {selected_std}")
         std_list.pop(selected_std)
-    
         print(std_list)
-
         decrease_counter()
     else:
         pass
@@ -126,7 +130,7 @@ def combine_funcs(*funcs):
     return combined_func
 
 def onReturn(*args):
-    return combine_funcs(phase_display(), put_to_list())
+    return phase_generator()
 
 def update_clock():
     time_str = time.strftime('%H:%M:%S')
@@ -205,7 +209,7 @@ s_result_label = Label(window, text='', font='THSarabunPSK 12', bg='#B2D7F2')
 s_result_label.place(x=615,y=130)
 
 # --------- BUTTON ---------
-SignIn_Btn = Button(text="ลงทะเบียน", bg="#40E0D0", command=combine_funcs(phase_display,put_to_list))
+SignIn_Btn = Button(text="ลงทะเบียน", bg="#40E0D0", command=phase_generator)
 SignIn_Btn.place(x=405,y=110)
 
 search_Btn = Button(text='Search', command=search_Button)
