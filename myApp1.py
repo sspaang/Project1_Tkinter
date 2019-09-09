@@ -104,7 +104,7 @@ def phase_display():
 def delete_listbox():
     MsgMox = messagebox.askokcancel(title='!!!', message='คุณต้องการลบชื่อที่เลือกใช่หรือไม่')
     if MsgMox is True:
-        selected_list = []
+        
         selected_std = collect_field_listbox.curselection()
         selected_std = int(selected_std[0])
         collect_field_listbox.delete(selected_std)
@@ -151,6 +151,9 @@ def search_Button():
         s_result_label.config(text='รหัสนิสิตนี้ยังไม่ได้ลงทะเบียน', fg='red')
         s_entry_label.config(text=entry_get, fg='red')
     search_entry.delete(0, 'end')
+
+def on_mousewheel(*args):
+    return collect_field_listbox.yview
 
 """ ---------------------------------------------------------------------------------------------------------"""
 std_list = []
@@ -228,6 +231,8 @@ collect_field_listbox = Listbox(window, height=10, width=50, font='THSarabunPSK 
 yscroll = Scrollbar(window, orient=VERTICAL, command=collect_field_listbox.yview)
 
 collect_field_listbox.configure(yscrollcommand = yscroll.set)
+
+yscroll.bind("<MouseWheel>", on_mousewheel)
 
 collect_field_listbox.place(x=185, y=200)
 yscroll.place(x=645, y=200, relheight=0.425)
