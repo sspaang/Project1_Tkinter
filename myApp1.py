@@ -33,7 +33,6 @@ def decrease_counter():
 def put_to_list():
 
     add_counter()
-
     # เก็บรหัสนิสิตใส่ list
     std_id = entry_field1.get()
     try:
@@ -49,7 +48,6 @@ def sorted_list():
     return sorted(list(set(std_list)))
 
 def export_btn():
-
     this_time = datetime.datetime.now()
     #this_timestr = this_time.strftime('%B %d, %Y')
 
