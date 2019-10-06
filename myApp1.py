@@ -239,5 +239,7 @@ yscroll.bind("<MouseWheel>", on_mousewheel)
 collect_field_listbox.place(x=185, y=200)
 yscroll.place(x=645, y=200, relheight=0.425)
 
+entry_field1.focus()        # starts app with cursor in the entry_field1
+
 # makes the frame appear on the screen
 window.mainloop()
